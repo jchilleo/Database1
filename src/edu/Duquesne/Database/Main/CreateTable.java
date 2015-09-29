@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 import static java.lang.System.out;
 
-public class CreateTable {
+public class CreateTable extends TableContainer{
 
-	ArrayList<ArrayList> table = new ArrayList<ArrayList>();
+	private ArrayList<ArrayList<String>> table = getTable();
+	//TODO add a setTable() call
 public void getTableFile(String fileName){
 	try {
 	      File file = new File(fileName + ".txt");
@@ -23,7 +24,6 @@ public void getTableFile(String fileName){
 
 private void createTable(String fileName){
 	
-	
 	ArrayList<String> tableLine = new ArrayList<String>();
 	//meta data located in first index of table array list, containing what each index of tableLine
 	//has, and their lengths.
@@ -35,6 +35,7 @@ private void createTable(String fileName){
 	
 	
 }
+
 
 
 
