@@ -10,6 +10,9 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class MenuGUI extends JFrame {
 
@@ -43,9 +46,13 @@ public class MenuGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBackground();
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(MenuGUI.class.getResource("/edu/Duquesne/Database/GUI/DB_logo.png")));
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("New button");
+		contentPane.add(btnNewButton, BorderLayout.CENTER);
 	}
 
 }

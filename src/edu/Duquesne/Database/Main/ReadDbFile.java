@@ -1,0 +1,56 @@
+package edu.Duquesne.Database.Main;
+
+import java.io.IOException;
+import static java.lang.System.out;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
+public class ReadDbFile {
+	
+	
+	public void getTables(){
+		readDbFile();
+	}
+	
+	private void readDbFile(){
+		BufferedReader br = null;
+		out.println("Current Tables:");
+		int tableStructure = 0;
+		try{
+			String tablesLine;
+			br = new BufferedReader(new FileReader("dbFile.txt"));
+			
+			while((tablesLine = br.readLine()) !=null){
+				out.println(tablesLine);
+				
+				switch(tableStructure){
+				case 1: tableStructure = 0;
+						out.println("Table Name: " + tablesLine);
+						tableStructure = (tableStructure + 1)%4;
+						break;
+				case 2: tableStructure = 1;
+						out.println("Number of Columns: " + tablesLine);
+						tableStructure = (tableStructure + 1)%4;
+						break;
+				case 3: tableStructure = 2;
+						out.println("Length of one record is: " + tablesLine);
+						tableStructure = (tableStructure + 1)%4;
+						break;
+				case 4: tableStructure = 3;
+						out.println("List of all column names/lengths" + tablesLine);
+						tableStructure = (tableStructure + 1)%4;
+						break;
+						//length is reference to record
+				}
+				
+			}
+		}
+		catch (IOException e){e.printStackTrace();}
+		finally{
+			try{if(br != null)br.close();}
+			catch(IOException ex){ex.printStackTrace();}
+			}
+		}
+	}
+
+
