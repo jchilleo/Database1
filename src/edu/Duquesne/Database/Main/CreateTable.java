@@ -16,7 +16,7 @@ public class CreateTable extends TableContainer{
 	
 	public void getTableFile(String fileName, String columnHeadersAndLengths){
 		try {
-	      File file = new File("/edu/Duquesne/Database/files" + fileName + ".txt");
+	      File file = new File("/edu/Duquesne/Database/files/" + fileName + ".txt");
 	      if (file.createNewFile()){
 	    	  table.add(gatherColumnMeta(createTable(fileName, file, columnHeadersAndLengths), fileName, columnHeadersAndLengths));
 	        out.println(fileName + ".txt is created!");
@@ -90,9 +90,7 @@ public class CreateTable extends TableContainer{
 	}
 	
 	private void extractTable(BufferedReader br, File file){
-		ArrayList<Integer> columnLengths = getColumnLengths();
 		ArrayList<String> tableLine = new ArrayList<String>();
-		boolean skip = false;
 		String extraction = null;
 		
 		try{

@@ -11,15 +11,10 @@ public class MainMenu {
 	public static void main(String[] args) {
 		MainMenu db = new MainMenu();
 		db.dbfCheck();
-		
-
 	}
 	
-	
-	private void dbfCheck(){
-		
+	private void dbfCheck(){	
 		try {
-   		 
 		      File file = new File("dbFiles.txt");
 		      
 		      if (file.createNewFile()){
@@ -28,8 +23,6 @@ public class MainMenu {
 		        out.println("dfFile already exists.");
 		      }
 		      
-	    	} catch (IOException e) {
-		      e.printStackTrace();
-		}
+	    	} catch (IOException e) {e.printStackTrace();}
 	}
 }
