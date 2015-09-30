@@ -14,6 +14,11 @@ public class CreateTable extends TableContainer{
 	private ArrayList<ArrayList<String>> table = getTable();
 	//TODO add a setTable() call
 	
+	/**
+	 * Create or load an existing database table file.
+	 * @param fileName Name of the database file with no extension.
+	 * @param columnHeadersAndLengths String containing the column headers and their lengths separted by spaces. 
+	 */
 	public void getTableFile(String fileName, String columnHeadersAndLengths){
 		try {
 	      File file = new File("/edu/Duquesne/Database/files/" + fileName + ".txt");
@@ -28,7 +33,13 @@ public class CreateTable extends TableContainer{
 		
 		
 	}
-
+	/**
+	 * Write to the file the fileName and the meta data.
+	 * @param fileName - Name of the file without extensions
+	 * @param file - File data location.
+	 * @param columnData - String containing all the column headers.
+	 * @return ArrayList for first index partially filled. 
+	 */
 	private ArrayList<String> createTable(String fileName, File file, String columnData){
 	
 		ArrayList<String> tableLine = new ArrayList<String>();
@@ -52,7 +63,13 @@ public class CreateTable extends TableContainer{
 		tableLine.add(fileName);
 		return tableLine;
 	}
-	
+	/**
+	 * Parse column header data to separate and sort string names from int lengths.
+	 * @param tableLine - partially field first index arrayList.
+	 * @param fileName	- Name of the file with no extension.
+	 * @param columnData - String to be parsed.
+	 * @return - filled arraylist ready to be added to the main table.
+	 */
 	private ArrayList<String> gatherColumnMeta(ArrayList<String> tableLine, String fileName, String columnData){
 		
 		ArrayList<Integer> columnLengths = getColumnLengths();
@@ -69,6 +86,10 @@ public class CreateTable extends TableContainer{
 		return tableLine;
 	}
 	
+	/**
+	 * Extracts header/meta data from a file and loads into database.
+	 * @param file - path location of the file.
+	 */
 	private void loadTable(File file){
 		BufferedReader br = null;
 		String fileName = null, columnHeadersAndLengths = null;
@@ -86,10 +107,15 @@ public class CreateTable extends TableContainer{
 		tableLine.add("Tombstone");
 		tableLine.add(fileName);
 		table.add(gatherColumnMeta(tableLine, fileName, columnHeadersAndLengths));
-		extractTable(br, file);
+		extractTable(file);
 	}
 	
-	private void extractTable(BufferedReader br, File file){
+	/**
+	 * Extracts the main parts of the database from the file.
+	 * @param file - file path location for the database file.
+	 */
+	private void extractTable(File file){
+		BufferedReader br = null;
 		ArrayList<String> tableLine = new ArrayList<String>();
 		String extraction = null;
 		
