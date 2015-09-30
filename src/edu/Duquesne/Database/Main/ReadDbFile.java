@@ -18,7 +18,7 @@ public class ReadDbFile {
 		int tableStructure = 0;
 		try{
 			String tablesLine;
-			br = new BufferedReader(new FileReader("dbFile.txt"));
+			br = new BufferedReader(new FileReader("/edu/Duquesne/Database/files/dbFile.txt"));
 			
 			while((tablesLine = br.readLine()) !=null){
 				out.println(tablesLine);
