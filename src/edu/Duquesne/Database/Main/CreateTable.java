@@ -22,7 +22,8 @@ public class CreateTable extends TableContainer{
 	public void getTableFile(String fileName, String columnHeadersAndLengths){
 		try {
 	      File file = new File("/edu/Duquesne/Database/files/" + fileName + ".txt");
-	      if (file.createNewFile()){
+	      if (file.exists() != true){
+	    	  file.createNewFile();
 	    	  table.add(gatherColumnMeta(createTable(fileName, file, columnHeadersAndLengths), fileName, columnHeadersAndLengths));
 	        out.println(fileName + ".txt is created!");
 	      }else{
@@ -71,7 +72,7 @@ public class CreateTable extends TableContainer{
 	 * @return - filled arraylist ready to be added to the main table.
 	 */
 	private ArrayList<String> gatherColumnMeta(ArrayList<String> tableLine, String fileName, String columnData){
-		
+		int ctotal= 0, rlength = 0;
 		ArrayList<Integer> columnLengths = getColumnLengths();
 		
 		columnLengths.add("Tombstone".length());
@@ -81,8 +82,14 @@ public class CreateTable extends TableContainer{
 		for(int i = 0; i < (cDataStrings.length - 1); i = i+2){
 			tableLine.add(cDataStrings[i]);
 			columnLengths.add(Integer.parseInt(cDataStrings[i+1]));
+			rlength= rlength + Integer.parseInt(cDataStrings[i+1]);
+			ctotal++;
 		}
+		setColumnTotal(ctotal);
+		setRecordLength(rlength);
 		setColumnLengths(columnLengths);
+		ReadDbFile rdbf = new ReadDbFile();
+		rdbf.addToDbFile(fileName, getColumnTotal(), getRecordLength(),columnData);
 		return tableLine;
 	}
 	

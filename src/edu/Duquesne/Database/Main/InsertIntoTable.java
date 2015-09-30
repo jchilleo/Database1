@@ -16,9 +16,9 @@ public class InsertIntoTable extends TableContainer {
 	 * @param tableName name of the table (same as filename without extension)
 	 * @param columns (All the column data separated by spaces (use underscore if space exist in name))
 	 */
-	public void addToTabel(String tableName, String columns){
+	public void addToTable(String tableName, String columns){
 		ArrayList<String> insert = new ArrayList<String>();
-		insert.add("fasle"); //by default tombstone is marked as false, so it won't be deleted during purge.
+		insert.add("false"); //by default tombstone is marked as false, so it won't be deleted during purge.
 		insert.add(tableName);
 		parseInsertColumns(insert, columns);
 		table.add(insert);
