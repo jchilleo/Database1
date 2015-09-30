@@ -12,7 +12,7 @@ public class InsertIntoTable extends TableContainer {
 	private ArrayList<Integer> lengths = getColumnLengths();
 	
 	/**
-	 * 
+	 * add a line to the table
 	 * @param tableName name of the table (same as filename without extension)
 	 * @param columns (All the column data separated by spaces (use underscore if space exist in name))
 	 */
@@ -27,7 +27,7 @@ public class InsertIntoTable extends TableContainer {
 	}
 	
 	/**
-	 * 
+	 * parse a string of column data and add to table line.
 	 * @param insert 
 	 * @param columns
 	 */

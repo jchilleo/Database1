@@ -30,6 +30,11 @@ public class removeTableLine extends TableContainer{
 		File file = new File("/edu/Duquesne/Database/files/" + fileName + ".txt");
 		updateLine(oldLine, newLine, file);
 	}
+	/**
+	 * returns an index from table as a long string for print writing.
+	 * @param lineUpdate -table entry to be converted to a string
+	 * @return concatenated string.
+	 */
 	private String lineToString(ArrayList<String> lineUpdate){
 		String stringLine = null;
 		for(String tmp : lineUpdate){
@@ -41,6 +46,13 @@ public class removeTableLine extends TableContainer{
 	 * http://stackoverflow.com/questions/25220340/java-replace-line-in-a-text-file
 	 * reference site in this original post of above link
 	 * http://stackoverflow.com/questions/20039980/java-replace-line-in-text-file
+	 */
+	/**
+	 * Updates the file to reflect to tombstone change to from false to true.
+	 * @param toUpdate -line that needs updated
+	 * @param updated - post update of line
+	 * @param file - file location 
+	 * @throws IOException
 	 */
 	private void updateLine(String toUpdate, String updated, File file) throws IOException {
 	    BufferedReader br = new BufferedReader(new FileReader(file));
