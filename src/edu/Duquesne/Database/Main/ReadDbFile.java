@@ -9,10 +9,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
+
 
 public class ReadDbFile {
 	
@@ -32,7 +29,7 @@ public class ReadDbFile {
 		int tableStructure = 0;
 		try{
 			String tablesLine;
-			br = new BufferedReader(new FileReader("/edu/Duquesne/Database/files/dbFile.txt"));
+			br = new BufferedReader(new FileReader("src/edu/Duquesne/Database/files/dbFiles.txt"));
 			
 			while((tablesLine = br.readLine()) !=null){
 				out.println(tablesLine);
@@ -78,7 +75,7 @@ public class ReadDbFile {
 		 * Code segement acquired from:
 		 * http://stackoverflow.com/questions/1625234/how-to-append-text-to-an-existing-file-in-java
 		 */
-		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("myfile.txt", true)))) {
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("src/edu/Duquesne/Database/files/dbFiles.txt", true)))) {
 		    out.println(fileName);
 		    out.println("Number of columns: " + columnTotal);
 		    out.println("Total Record Length: " + recordLength);

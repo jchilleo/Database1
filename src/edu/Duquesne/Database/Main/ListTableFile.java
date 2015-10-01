@@ -1,15 +1,18 @@
 package edu.Duquesne.Database.Main;
 
 import java.util.ArrayList;
+
 import static java.lang.System.out;
 
 public class ListTableFile extends TableContainer {
 
-	private ArrayList<ArrayList<String>> table = getTable();
-	private ArrayList<Integer> columnLength = getColumnLengths();
+	
+	
 	private String buffer = " ";
 	
 	public void listFile(){
+		ArrayList<Integer> columnLength = new ArrayList<> (getColumnLengths());
+		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		int index = 0;
 		for(ArrayList<String> tableLines: table){
 			index = 0;

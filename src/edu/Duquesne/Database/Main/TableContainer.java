@@ -6,23 +6,46 @@ public class TableContainer {
 	private ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
 	private ArrayList<Integer> columnLength = new ArrayList<Integer>();
 	private int recordLength = 0, columnTotal = 0;
-
+	
+	/**
+	 * getter for the main table object
+	 * @return the main table
+	 */
 	public ArrayList<ArrayList<String>> getTable(){
-		return table;
+		return (new ArrayList<>(table));
 	}
+	/**
+	 * set the main table
+	 * @param table - newer version of the main table.
+	 */
 	public void setTable(ArrayList<ArrayList<String>> table){
-		this.table = table;
+		this.table.addAll(table);
 	}
-
+	/**
+	 * Getter for columnLengths
+	 * @return - ArrayList<Integers> for all column lengths
+	 */
 	public ArrayList<Integer> getColumnLengths(){
-		return columnLength;
+		return (new ArrayList<>(columnLength));
 	}
+	/**
+	 * setter for column lengths
+	 * @param columnLength - arraylist of integers of column lengths
+	 */
 	public void setColumnLengths(ArrayList<Integer> columnLength){
-		this.columnLength = columnLength;
+		this.columnLength.addAll(columnLength);
 	}
+	/**
+	 * Getter for total record length of all columns (expect the first two).
+	 * @return - total combined record length.
+	 */
 	public int getRecordLength(){
 		return recordLength;
 	}
+	/**
+	 * Setter for total record length
+	 * @param recordLength - total record length of all columns combined.
+	 */
 	public void setRecordLength(int recordLength){
 		this.recordLength = recordLength;
 	}

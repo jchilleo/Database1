@@ -11,7 +11,7 @@ import static java.lang.System.out;
 
 public class CreateTable extends TableContainer{
 
-	private ArrayList<ArrayList<String>> table = getTable();
+	
 	//TODO add a setTable() call
 	
 	/**
@@ -20,17 +20,18 @@ public class CreateTable extends TableContainer{
 	 * @param columnHeadersAndLengths String containing the column headers and their lengths separted by spaces. 
 	 */
 	public void getTableFile(String fileName, String columnHeadersAndLengths){
+		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		try {
-	      File file = new File("/edu/Duquesne/Database/files/" + fileName + ".txt");
-	      if (file.exists() != true){
-	    	  file.createNewFile();
-	    	  table.add(gatherColumnMeta(createTable(fileName, file, columnHeadersAndLengths), fileName, columnHeadersAndLengths));
+	      File file = new File("src/edu/Duquesne/Database/files/" + fileName + ".txt");
+	      if (file.createNewFile()){
+	    	  table.add(gatherColumnMeta(createTable(fileName, file, columnHeadersAndLengths), fileName, columnHeadersAndLengths, true));
 	        out.println(fileName + ".txt is created!");
 	      }else{
 	    	  loadTable(file);
 	        out.println(fileName + ".txt has been loaded.");
 	      } } 
 		catch (IOException e) {e.printStackTrace();}
+		setTable(new ArrayList<>(table));
 		
 		
 	}
@@ -62,7 +63,7 @@ public class CreateTable extends TableContainer{
 		* the int length. */
 		tableLine.add("Tombstone");
 		tableLine.add(fileName);
-		return tableLine;
+		return (new ArrayList<>(tableLine));
 	}
 	/**
 	 * Parse column header data to separate and sort string names from int lengths.
@@ -71,9 +72,9 @@ public class CreateTable extends TableContainer{
 	 * @param columnData - String to be parsed.
 	 * @return - filled arraylist ready to be added to the main table.
 	 */
-	private ArrayList<String> gatherColumnMeta(ArrayList<String> tableLine, String fileName, String columnData){
+	private ArrayList<String> gatherColumnMeta(ArrayList<String> tableLine, String fileName, String columnData, boolean newlyCreated){
 		int ctotal= 0, rlength = 0;
-		ArrayList<Integer> columnLengths = getColumnLengths();
+		ArrayList<Integer> columnLengths = new ArrayList<Integer>();
 		
 		columnLengths.add("Tombstone".length());
 		columnLengths.add(fileName.length());
@@ -87,10 +88,11 @@ public class CreateTable extends TableContainer{
 		}
 		setColumnTotal(ctotal);
 		setRecordLength(rlength);
-		setColumnLengths(columnLengths);
-		ReadDbFile rdbf = new ReadDbFile();
-		rdbf.addToDbFile(fileName, getColumnTotal(), getRecordLength(),columnData);
-		return tableLine;
+		setColumnLengths(new ArrayList<>(columnLengths));
+		if(newlyCreated)
+			{ReadDbFile rdbf = new ReadDbFile();
+			rdbf.addToDbFile(fileName, getColumnTotal(), getRecordLength(),columnData);}
+		return (new ArrayList<>(tableLine));
 	}
 	
 	/**
@@ -98,6 +100,7 @@ public class CreateTable extends TableContainer{
 	 * @param file - path location of the file.
 	 */
 	private void loadTable(File file){
+		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		BufferedReader br = null;
 		String fileName = null, columnHeadersAndLengths = null;
 		try{
@@ -113,8 +116,10 @@ public class CreateTable extends TableContainer{
 		ArrayList<String> tableLine = new ArrayList<String>();
 		tableLine.add("Tombstone");
 		tableLine.add(fileName);
-		table.add(gatherColumnMeta(tableLine, fileName, columnHeadersAndLengths));
+		table.add(gatherColumnMeta(tableLine, fileName, columnHeadersAndLengths, false));
+		setTable(new ArrayList<>(table));
 		extractTable(file);
+		
 	}
 	
 	/**
@@ -122,6 +127,7 @@ public class CreateTable extends TableContainer{
 	 * @param file - file path location for the database file.
 	 */
 	private void extractTable(File file){
+		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		BufferedReader br = null;
 		ArrayList<String> tableLine = new ArrayList<String>();
 		String extraction = null;
@@ -137,14 +143,17 @@ public class CreateTable extends TableContainer{
 			String[] cDataStrings = extraction.split("\\s+");
 			for(int i = 0; i < (cDataStrings.length - 1); i++){
 				tableLine.add(cDataStrings[i]);
-			}}
+			}
+			table.add(tableLine);
+			if(br.ready()) extraction = br.readLine();
+			}
 		}
 		catch (IOException e){e.printStackTrace();}
 		finally{
 			try{if(br != null)br.close();}
 			catch(IOException ex){ex.printStackTrace();}
 			}
-		
+		setTable(new ArrayList<>(table));
 	
 	}
 

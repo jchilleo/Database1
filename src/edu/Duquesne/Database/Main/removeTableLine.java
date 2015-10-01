@@ -9,14 +9,13 @@ import java.util.ArrayList;
 
 public class removeTableLine extends TableContainer{
 	
-	private ArrayList<ArrayList<String>> table = getTable();
-	
 	/**
 	 * Changes tombstone to true at specific index in the table, so that purge will fully remove the entry.
 	 * @param indexToRemove - The index in the ArrayList that is intended to be removed.
 	 * @throws IOException 
 	 */
 	public void removeEntry(int indexToRemove) throws IOException{
+		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		String oldLine = null, newLine = null;
 		ArrayList<String> temp = table.get(indexToRemove);
 		oldLine = lineToString(temp);
@@ -24,7 +23,7 @@ public class removeTableLine extends TableContainer{
 		temp.add(0, "true");
 		table.remove(indexToRemove);
 		table.add(indexToRemove, temp);
-		setTable(table);
+		//setTable(table);
 		newLine = lineToString(temp);
 		String fileName = temp.get(1);
 		File file = new File("/edu/Duquesne/Database/files/" + fileName + ".txt");

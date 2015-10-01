@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 public class InsertIntoTable extends TableContainer {
 
-	private ArrayList<ArrayList<String>> table = getTable();
-	private ArrayList<Integer> lengths = getColumnLengths();
-	
+	private ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>(getTable());
+	private ArrayList<Integer> columnLengths = new ArrayList<>(getColumnLengths());
 	/**
 	 * add a line to the table
 	 * @param tableName name of the table (same as filename without extension)
@@ -20,18 +19,17 @@ public class InsertIntoTable extends TableContainer {
 		ArrayList<String> insert = new ArrayList<String>();
 		insert.add("false"); //by default tombstone is marked as false, so it won't be deleted during purge.
 		insert.add(tableName);
-		parseInsertColumns(insert, columns);
+		insert = parseInsertColumns(insert, columns);
 		table.add(insert);
-		setTable(table);
+		setTable(new ArrayList<>(table));
 		addToDbFile(tableName, insert);
 	}
-	
 	/**
 	 * parse a string of column data and add to table line.
 	 * @param insert 
 	 * @param columns
 	 */
-	private void parseInsertColumns(ArrayList<String> insert, String columns){
+	private ArrayList<String> parseInsertColumns(ArrayList<String> insert, String columns){
 		String[] extractedStrings = columns.split("\\s+");
 		int index = 2;
 		for(String exString : extractedStrings){
@@ -39,10 +37,17 @@ public class InsertIntoTable extends TableContainer {
 			insert.add(exString);
 			index++;
 		}
+		return (new ArrayList<>(insert));
 	}
-	
+	/**
+	 * Cut column data to the appropriate record length.
+	 * @param index - location or row in the table of the string
+	 * @param cString - the string needed to be cut
+	 * @return a string with the correct length for a column
+	 */
 	private String cutString(int index, String cString){
-		int maxLength = lengths.get(index);
+		
+		int maxLength = columnLengths.get(index);
 		if(cString.length() <= maxLength){
 			return cString;
 		}
@@ -51,7 +56,11 @@ public class InsertIntoTable extends TableContainer {
 			return cString;
 		}
 	}
-	
+	/**
+	 * Add to database file
+	 * @param fileName name of the file
+	 * @param insert -Arraylist object that needs to be added to the file. 
+	 */
 	private void addToDbFile(String fileName, ArrayList<String> insert){
 		
 		String addToFile = null;
@@ -67,11 +76,15 @@ public class InsertIntoTable extends TableContainer {
 		}
 
 	}
-	
+	/**
+	 * converts an ArrayList<Strings> into a long concatenated string
+	 * @param lineUpdate - ArrayList object to be stringed
+	 * @return - a string of all data in the arrayList concatenated together.
+	 */
 	private String lineToString(ArrayList<String> lineUpdate){
 		String stringLine = null;
 		for(String tmp : lineUpdate){
-			stringLine = stringLine.concat(tmp);
+			stringLine = stringLine.concat(tmp + " ");
 		}
 		return stringLine;
 	}

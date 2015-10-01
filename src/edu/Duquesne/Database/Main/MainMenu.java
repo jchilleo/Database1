@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 import static java.lang.System.out;
 
-
+	
 
 public class MainMenu extends TableContainer{
-	
-	private ArrayList<ArrayList<String>> table = getTable();
+	private ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
+	private String headers = "";
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		MainMenu db = new MainMenu();
@@ -93,7 +93,7 @@ public class MainMenu extends TableContainer{
 			boolean notFinished = true;
 			out.println("Please enter a name for the new file without extensions.");
 			fileName = getResponse(in);
-			out.println("The file name you enter is: " + fileName + ".txt"); 
+			out.println("The file name you entered is: " + fileName + ".txt"); 
 			while(notFinished){
 				columnData = getColumnData(columnData, in);
 				out.println("Would you like to add more columns?");
@@ -105,6 +105,7 @@ public class MainMenu extends TableContainer{
 					notFinished = false;
 				}
 			}
+			InsertIntoTable iIT = new InsertIntoTable();
 			CreateTable ct = new CreateTable();
 			ct.getTableFile(fileName, columnData);
 		mainMenu2(fileName, in);
@@ -117,14 +118,17 @@ public class MainMenu extends TableContainer{
 		return response;
 	}
 	private String getColumnData(String columnData, Scanner in){
-		out.println("Please enter a column title, use an underscore for a space in the title.");
-		columnData = columnData.concat(getResponse(in)+ " ");
+		out.println("Please enter a column title.");
+		String tmp = getResponse(in);
+		headers = headers.concat(tmp + " ");
+		columnData = columnData.concat(tmp.replaceAll("\\s+", "_")+ " ");
 		out.println("Please enter a column length.");
 		columnData = columnData.concat(getResponse(in) + " ");
 		return columnData;
 	}
 	
 	private void mainMenu2(String fileName, Scanner in){
+		
 		String response;
 		int resp;
 		do{
@@ -164,8 +168,9 @@ public class MainMenu extends TableContainer{
 		boolean notFinished = true;
 		String columnData = "", response;
 		while(notFinished){
-			out.println("Please enter the data for one column, and use an underscore to represent a space.");
-			columnData = columnData.concat(getResponse(in)+ " ");
+			out.println("Column Titles: " + headers);
+			out.println("Please enter the data for one column.");
+			columnData = columnData.concat(getResponse(in).replaceAll("\\s+", "_") + " ");
 			out.println("Do you have more column data to enter?");
 			out.println("[1] yes.");
 			out.println("[2] no.");
@@ -179,4 +184,6 @@ public class MainMenu extends TableContainer{
 		InsertIntoTable iit = new InsertIntoTable();
 		iit.addToTable(fileName, columnData);
 	}
+	
+	
 }

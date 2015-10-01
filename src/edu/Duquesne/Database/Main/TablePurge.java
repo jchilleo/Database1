@@ -7,13 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TablePurge extends TableContainer {
-	ArrayList<ArrayList<String>> table = getTable();
-	ArrayList<Integer> columnLengths = getColumnLengths();
 	
 	/**
 	 * Removes all table entries with tombstones marked as true from the database file.
 	 */
 	public void purgeDataBase(){
+		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		ArrayList<String> header = table.get(0);
 		String fileName = null, extractedMeta = null;
 		
@@ -34,6 +33,7 @@ public class TablePurge extends TableContainer {
 	 * @return returns the first row as a concatenated string. 
 	 */
 	private String extractMetaData(ArrayList<String> header){
+		ArrayList<Integer> columnLengths = new ArrayList<>(getColumnLengths());
 		String meta = null;
 		int index = 0;
 		for(String tmp: header){
@@ -51,6 +51,7 @@ public class TablePurge extends TableContainer {
 	 * @return A row from the database in a concatenated string.
 	 */
 	private String extractData(ArrayList<String> tableLine){
+		ArrayList<Integer> columnLengths = new ArrayList<>(getColumnLengths());
 		String data = null;
 		int index = 0;
 		boolean tombStone = false;
@@ -69,6 +70,7 @@ public class TablePurge extends TableContainer {
 	 * @param meta
 	 */
 	private void makeNewFile(String fileName, String meta){
+		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		File file = null;
 		boolean firstLine = true;
 		String tmp;
