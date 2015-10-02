@@ -11,9 +11,9 @@ public class ListTableFile extends TableContainer {
 	private String buffer = " ";
 	
 	public void listFile(){
-		ArrayList<Integer> columnLength = new ArrayList<> (getColumnLengths());
-		ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
-		int index = 0;
+		//ArrayList<Integer> columnLength = new ArrayList<> (getColumnLengths());
+		//ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
+		int index;
 		for(ArrayList<String> tableLines: table){
 			index = 0;
 			if(table.indexOf(tableLines) == 0){

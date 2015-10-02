@@ -3,9 +3,9 @@ package edu.Duquesne.Database.Main;
 import java.util.ArrayList;
 
 public class TableContainer {
-	private ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-	private ArrayList<Integer> columnLength = new ArrayList<Integer>();
-	private int recordLength = 0, columnTotal = 0;
+	protected static ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+	protected static ArrayList<Integer> columnLength = new ArrayList<Integer>();
+	protected static int recordLength = 0, columnTotal = 0;
 	
 	/**
 	 * getter for the main table object

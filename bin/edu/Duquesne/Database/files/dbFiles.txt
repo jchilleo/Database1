@@ -1,0 +1,4 @@
+books
+Number of columns: 3
+Total Record Length: 45
+Author 20 Title 20 CallNo 5 

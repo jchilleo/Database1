@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import edu.Duquesne.Database.GUI.MenuGUI;
 import static java.lang.System.out;
 
 	
 
 public class MainMenu extends TableContainer{
-	private ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
-	private String headers = "";
+	//private ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
+	protected static String headers = "";
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		MainMenu db = new MainMenu();
@@ -37,9 +38,11 @@ public class MainMenu extends TableContainer{
 	
 	private void mainMenu(Scanner in){
 		boolean valid = false;
+		MenuGUI mg = new MenuGUI();
 		int resp = 0;
 		do{
-		out.println("What you like to do?");
+		//mg.setDisplayBox("What would you like to do?");
+		out.println("What would you like to do?");
 		out.println("[1] Create or Load a Table");
 		out.println("[2] Exit");
 		String response = getResponse(in);
@@ -183,6 +186,9 @@ public class MainMenu extends TableContainer{
 		
 		InsertIntoTable iit = new InsertIntoTable();
 		iit.addToTable(fileName, columnData);
+	}
+	public void setHeaders(String headers){
+		this.headers = headers;
 	}
 	
 	
