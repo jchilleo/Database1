@@ -152,6 +152,13 @@ public class MainMenu extends TableContainer{
 				resp = Integer.parseInt(response);
 			}
 			while(resp > table.size() || resp < 1);
+			removeTableLine rtl = new removeTableLine();
+			try {
+				rtl.removeEntry(resp);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
 		}
 			else{out.println("There are no entries that can be removed from this table");}
 		}

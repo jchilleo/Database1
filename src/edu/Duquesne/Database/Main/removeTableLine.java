@@ -35,9 +35,9 @@ public class removeTableLine extends TableContainer{
 	 * @return concatenated string.
 	 */
 	private String lineToString(ArrayList<String> lineUpdate){
-		String stringLine = null;
+		String stringLine = "";
 		for(String tmp : lineUpdate){
-			stringLine = stringLine.concat(tmp);
+			stringLine = stringLine.concat(tmp + " ");
 		}
 		return stringLine;
 	}
