@@ -16,18 +16,20 @@ public class ListTableFile extends TableContainer {
 		int index;
 		for(ArrayList<String> tableLines: table){
 			index = 0;
-			if(table.indexOf(tableLines) == 0){
+			/*if(table.indexOf(tableLines) == 0){
 				for(String item : tableLines){
 					out.print(" " + bufferAdjust(columnLength.get(index), item) + " |");
 					index++;
 			}
 				out.println();}
-			else{
+				*/
+		//	else{
 				for(String item : tableLines){
 					out.print(" " + bufferAdjust(columnLength.get(index), item) + " |");
 					index++;
 			}
-				out.println();}
+				out.println();
+				//}
 		}
 	}
 	
@@ -35,7 +37,7 @@ public class ListTableFile extends TableContainer {
 		String tmp = "";
 		int stringLength = recordString.length(), bufferAdjustment = recordLength - stringLength;
 		if(bufferAdjustment == 0){
-			return tmp;
+			return recordString;
 		}
 		else{
 			for(int i=0; i < bufferAdjustment; i++){
