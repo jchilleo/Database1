@@ -12,10 +12,8 @@ public class TablePurge extends TableContainer {
 	 * Removes all table entries with tombstones marked as true from the database file.
 	 */
 	public void purgeDataBase(){
-		//ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		ArrayList<String> header = table.get(0);
 		String fileName = "", extractedMeta = "";
-		
 		fileName = header.get(1);
 		extractedMeta = extractMetaData(new ArrayList<>(header));
 		try{
