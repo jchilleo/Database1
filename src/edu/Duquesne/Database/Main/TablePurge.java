@@ -17,7 +17,7 @@ public class TablePurge extends TableContainer {
 		String fileName = "", extractedMeta = "";
 		
 		fileName = header.get(1);
-		extractedMeta = extractMetaData(header);
+		extractedMeta = extractMetaData(new ArrayList<>(header));
 		try{
 		File file = new File("src/edu/Duquesne/Database/files/" + fileName + ".txt");
 		file.delete();
@@ -92,9 +92,9 @@ public class TablePurge extends TableContainer {
 			for(ArrayList<String> tLine: table){
 				if(tLine.get(0) == "Tombstone"){}
 				else{
-				if(firstLine) firstLine = false;
+				if(firstLine = Boolean.parseBoolean(tLine.get(0))) firstLine = false;
 				else{
-					tmp = extractData(tLine);
+					tmp = extractData(new ArrayList<>(tLine));
 					if(tmp == null){}
 					else{
 						bw.write(tmp);
