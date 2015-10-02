@@ -80,9 +80,7 @@ public class ReadDbFile {
 		    out.println("Number of columns: " + columnTotal);
 		    out.println("Total Record Length: " + recordLength);
 		    out.println(columnData);
-		}catch (IOException e) {
-		    //exception handling left as an exercise for the reader
-		}
+		}catch (IOException e) {e.printStackTrace();}
 
 	}
 	}

@@ -15,7 +15,7 @@ public class removeTableLine extends TableContainer{
 	 * @throws IOException 
 	 */
 	public void removeEntry(int indexToRemove) throws IOException{
-		//ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
+		
 		String oldLine = null, newLine = null;
 		ArrayList<String> temp = table.get(indexToRemove);
 		oldLine = lineToString(temp);
@@ -23,7 +23,6 @@ public class removeTableLine extends TableContainer{
 		temp.add(0, "true");
 		table.remove(indexToRemove);
 		table.add(indexToRemove, temp);
-		//setTable(table);
 		newLine = lineToString(temp);
 		String fileName = temp.get(1);
 		File file = new File("src/edu/Duquesne/Database/files/" + fileName + ".txt");

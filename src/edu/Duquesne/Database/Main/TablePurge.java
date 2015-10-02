@@ -33,7 +33,6 @@ public class TablePurge extends TableContainer {
 	 * @return returns the first row as a concatenated string. 
 	 */
 	private String extractMetaData(ArrayList<String> header){
-		//ArrayList<Integer> columnLengths = new ArrayList<>(getColumnLengths());
 		String meta = "";
 		int index = 0;
 		for(String tmp: header){
@@ -52,7 +51,6 @@ public class TablePurge extends TableContainer {
 	 * @return A row from the database in a concatenated string.
 	 */
 	private String extractData(ArrayList<String> tableLine){
-		//ArrayList<Integer> columnLengths = new ArrayList<>(getColumnLengths());
 		String data = "";
 		int index = 0;
 		boolean tombStone = false;
@@ -71,8 +69,8 @@ public class TablePurge extends TableContainer {
 	 * @param meta
 	 */
 	private void makeNewFile(String fileName, String meta){
-		//ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		File file = null;
+		@SuppressWarnings("unused")
 		boolean firstLine = true;
 		String tmp;
 		try { 

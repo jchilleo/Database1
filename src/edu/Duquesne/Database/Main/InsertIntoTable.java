@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 public class InsertIntoTable extends TableContainer {
 
-	private ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>(getTable());
-	private ArrayList<Integer> columnLengths = new ArrayList<>(getColumnLengths());
+
 	/**
 	 * add a line to the table
 	 * @param tableName name of the table (same as filename without extension)
@@ -21,7 +20,6 @@ public class InsertIntoTable extends TableContainer {
 		insert.add(tableName);
 		insert = parseInsertColumns(insert, columns);
 		table.add(insert);
-		//setTable(new ArrayList<>(table));
 		addToDbFile(tableName, insert);
 	}
 	/**
@@ -47,7 +45,7 @@ public class InsertIntoTable extends TableContainer {
 	 */
 	private String cutString(int index, String cString){
 		
-		int maxLength = columnLengths.get(index);
+		int maxLength = columnLength.get(index);
 		if(cString.length() <= maxLength){
 			return cString;
 		}
@@ -65,7 +63,6 @@ public class InsertIntoTable extends TableContainer {
 		
 		String addToFile = null;
 		addToFile = lineToString(insert);
-		//addToFile = addToFile.replaceAll("_", " ");
 		/*
 		 * Code segement acquired from:
 		 * http://stackoverflow.com/questions/1625234/how-to-append-text-to-an-existing-file-in-java
@@ -73,9 +70,7 @@ public class InsertIntoTable extends TableContainer {
 		try {
 			Files.write(Paths.get("src/edu/Duquesne/Database/files/" + fileName + ".txt"), System.lineSeparator().getBytes(), StandardOpenOption.APPEND);
 		    Files.write(Paths.get("src/edu/Duquesne/Database/files/" + fileName + ".txt"), addToFile.getBytes(), StandardOpenOption.APPEND);
-		}catch (IOException e) {
-		    //exception handling left as an exercise for the reader
-		}
+		}catch (IOException e) { e.printStackTrace();}
 
 	}
 	/**

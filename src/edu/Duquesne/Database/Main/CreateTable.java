@@ -10,9 +10,6 @@ import java.io.FileWriter;
 import static java.lang.System.out;
 
 public class CreateTable extends TableContainer{
-
-	
-	//TODO add a setTable() call
 	
 	/**
 	 * Create or load an existing database table file.
@@ -20,7 +17,6 @@ public class CreateTable extends TableContainer{
 	 * @param columnHeadersAndLengths String containing the column headers and their lengths separted by spaces. 
 	 */
 	public void getTableFile(String fileName, String columnHeadersAndLengths){
-		//ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		try {
 	      File file = new File("src/edu/Duquesne/Database/files/" + fileName + ".txt");
 	      if (file.createNewFile()){
@@ -31,8 +27,6 @@ public class CreateTable extends TableContainer{
 	        out.println(fileName + ".txt has been loaded.");
 	      } } 
 		catch (IOException e) {e.printStackTrace();}
-		//setTable(new ArrayList<>(table));
-		
 		
 	}
 	/**
@@ -73,8 +67,6 @@ public class CreateTable extends TableContainer{
 	 * @return - filled arraylist ready to be added to the main table.
 	 */
 	private ArrayList<String> gatherColumnMeta(ArrayList<String> tableLine, String fileName, String columnData, boolean newlyCreated){
-		//int ctotal= 0, rlength = 0;
-		//ArrayList<Integer> columnLengths = new ArrayList<Integer>();
 		
 		columnLength.add("Tombstone".length());
 		columnLength.add(fileName.length());
@@ -86,9 +78,7 @@ public class CreateTable extends TableContainer{
 			recordLength= recordLength + Integer.parseInt(cDataStrings[i+1]);
 			columnTotal++;
 		}
-		//setColumnTotal(ctotal);
-		//setRecordLength(rlength);
-		//setColumnLengths(new ArrayList<>(columnLengths));
+		
 		if(newlyCreated)
 			{ReadDbFile rdbf = new ReadDbFile();
 			rdbf.addToDbFile(fileName, getColumnTotal(), getRecordLength(),columnData);}
@@ -100,7 +90,6 @@ public class CreateTable extends TableContainer{
 	 * @param file - path location of the file.
 	 */
 	private void loadTable(File file){
-		//ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		BufferedReader br = null;
 		String fileName = null, columnHeadersAndLengths = null;
 		try{
@@ -117,7 +106,6 @@ public class CreateTable extends TableContainer{
 		tableLine.add("Tombstone");
 		tableLine.add(fileName);
 		table.add(gatherColumnMeta(tableLine, fileName, columnHeadersAndLengths, false));
-		//setTable(new ArrayList<>(table));
 		extractTable(file);
 		
 	}
@@ -127,7 +115,6 @@ public class CreateTable extends TableContainer{
 	 * @param file - file path location for the database file.
 	 */
 	private void extractTable(File file){
-		//ArrayList<ArrayList<String>> table = new ArrayList<>(getTable());
 		BufferedReader br = null;
 		ArrayList<String> tableLine = new ArrayList<String>();
 		String extraction = null;
@@ -157,9 +144,11 @@ public class CreateTable extends TableContainer{
 			try{if(br != null)br.close();}
 			catch(IOException ex){ex.printStackTrace();}
 			}
-		//setTable(new ArrayList<>(table));
 		getHeaders();
 	}
+	/**
+	 * Extracts the column titles, so user can see the column options when trying to insert. 
+	 */
 	private void getHeaders(){
 		MainMenu mm = new MainMenu();
 		int index = 0;
