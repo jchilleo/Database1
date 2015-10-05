@@ -15,6 +15,14 @@ public class ListTableFile extends TableContainer {
 		int index;
 		for(ArrayList<String> tableLines: table){
 			index = 0;
+
+			if(table.indexOf(tableLines) == 0){
+				for(String item : tableLines){
+					out.print(" " + bufferAdjust(columnLength.get(index), item) + " |");
+					index++;
+			}
+				out.println();}
+			else{
 				for(String item : tableLines){
 					out.print(" " + bufferAdjust(columnLength.get(index), item) + " |");
 					index++;
@@ -22,6 +30,9 @@ public class ListTableFile extends TableContainer {
 				out.println();
 				}}
 
+	
+				out.println();}
+		
 	/**
 	 * Adjust the amount of white space needed for each table entry, by taking the length of the entry subtracted by the max allowance and adding the difference.
 	 * @param recordLength - max length allowed for this column.
